@@ -1,0 +1,25 @@
+<div class="login-container">
+  <div class="login-card">
+
+    <h2>Iniciar Sesión</h2>
+
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+      <div class="p-field">
+        <label for="username">Usuario</label>
+        <input pInputText id="username" name="username" [(ngModel)]="username" required />
+      </div>
+
+      <div class="p-field">
+        <label for="password">Contraseña</label>
+        <input pPassword id="password" name="password" [(ngModel)]="password" required />
+      </div>
+
+      <button pButton type="submit" label="Ingresar" class="w-full mt-3"></button>
+
+      <p-message *ngIf="error" severity="error" text="Credenciales inválidas"></p-message>
+
+    </form>
+  </div>
+</div>
+

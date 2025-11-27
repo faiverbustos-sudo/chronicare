@@ -3,7 +3,8 @@
   <button pButton
           icon="pi pi-bars"
           class="p-button-lg"
-          (click)="sidebarVisible = !sidebarVisible">
+          (click)="sidebarVisible = !sidebarVisible"
+          *ngIf="isAuthenticated()">
   </button>
 </header>
 
@@ -13,11 +14,14 @@
           [showCloseIcon]="true"
           styleClass="custom-sidebar"
           [closable]="true"
-          [dismissible]="true">
+          [dismissible]="true"
+          *ngIf="isAuthenticated()">
 
   <h3 class="sidebar-title">Menú</h3>
 
   <p-menu [model]="menuItems"></p-menu>
+
+  <button pButton type="button" label="Cerrar sesión" class="w-full mt-3" (click)="logout()"></button>
 </p-drawer>
 
 <!-- Contenido principal -->

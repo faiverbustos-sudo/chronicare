@@ -1,0 +1,48 @@
+<h1>Pacientes Crónicos - Panel de riesgo</h1>
+
+<p-table 
+  [value]="pacientes" 
+  [paginator]="true" 
+  [rows]="10" 
+  [loading]="loading"
+  [rowHover]="true"
+  sortField="nivel_riesgo"
+  [sortOrder]="-1">
+
+  <ng-template pTemplate="header">
+      <tr>
+          <th pSortableColumn="nombre">Paciente <p-sortIcon field="nombre"></p-sortIcon></th>
+          <th>Nivel riesgo</th>
+          <th>Última alerta</th>
+          <th>Fecha alerta</th>
+          <th>Último registro</th>
+          <th>Estado</th>
+      </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-p>
+      <tr>
+          <td>{{ p.nombre }}</td>
+
+          <td>
+              <span 
+                class="badge-riesgo" 
+                [style.background]="getColor(p.nivelRiesgo)">
+                {{ p.nivelRiesgo | uppercase }}
+              </span>
+          </td>
+
+          <td>{{ p.tipoAlerta }} – {{ p.alertaDescripcion }}</td>
+
+          <td>{{ p.fechaAlerta | date:'short' }}</td>
+
+          <td>
+            {{ p.tipoRegistro }}: {{ p.ultimoValor }}
+          </td>
+
+          <td>{{ p.estado }}</td>
+      </tr>
+  </ng-template>
+
+</p-table>
+

@@ -1,20 +1,52 @@
-<h1>Pacientes</h1>
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
 
-<p-table [value]="pacientes" [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template #header>
-        <tr>
-            <th>Nombre</th>
-            <th>Tipo documento</th>
-            <th>Fecha nacimiento</th>
-            <th>Genero</th>
-        </tr>
-    </ng-template>
-    <ng-template #body let-paciente>
-        <tr>
-            <td>{{ paciente.nombre }}</td>
-            <td>{{ paciente.tipoDocumento }}</td>
-            <td>{{ paciente.fechaNacimiento }}</td>
-            <td>{{ paciente.genero }}</td>
-        </tr>
-    </ng-template>
+<div class="p-d-flex p-jc-between p-ai-center mb-3">
+  <h2>Pacientes</h2>
+  <button pButton label="Nuevo Paciente" icon="pi pi-plus" (click)="nuevoPaciente()"></button>
+</div>
+
+<p-table [value]="pacientes" [loading]="loading" [paginator]="true" [rows]="10">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nombre</th>
+      <th>Identificación</th>
+      <th>Email</th>
+      <th>Estado</th>
+      <th style="width: 200px">Acciones</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-p>
+    <tr>
+      <td>{{ p.nombre }}</td>
+      <td>{{ p.tipoDocumento | uppercase }} - {{ p.documento }}</td>
+      <td>{{ p.email }}</td>
+      <td>
+        <span [ngClass]="p.estado === 'activo' ? 'text-green-600' : 'text-red-600'">
+          {{ p.estado === 'activo' ? 'Activo' : 'Inactivo' }}
+        </span>
+      </td>
+      <td>
+        <div class="flex gap-2 align-items-center">
+            <button pButton icon="pi pi-pencil" class="mr-2" (click)="editarPaciente(p)"></button>      
+
+          @if (p.estado === 'activo') {
+              <button pButton icon="pi pi-ban" class="p-button-danger" (click)="desactivar(p)"></button>          
+          }        
+
+          @if (p.estado === 'inactivo') {
+              <button pButton icon="pi pi-check" class="p-button-success" (click)="activar(p)"></button>        
+          } 
+        </div>               
+      </td>
+    </tr>
+  </ng-template>
 </p-table>
+
+<app-paciente-form
+  [visible]="showModal"
+  [paciente]="pacienteSeleccionado"
+  (close)="onModalClose()">
+</app-paciente-form>

@@ -1,0 +1,43 @@
+<p-dialog [(visible)]="visible"
+          modal="true"
+          [closable]="false"
+          [style]="{width: '450px'}">
+
+  <ng-template pTemplate="header">
+    <h3>{{ paciente ? 'Editar Paciente' : 'Nuevo Paciente' }}</h3>
+  </ng-template>
+
+  <form [formGroup]="form" class="p-fluid">
+
+    <div class="field">
+      <label>Nombre</label>
+      <input pInputText formControlName="nombre">
+    </div>
+
+    <div class="field">
+      <label>Identificación</label>
+      <input pInputText formControlName="identificacion">
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <input pInputText formControlName="email">
+    </div>
+
+    <div class="field">
+      <label>Teléfono</label>
+      <input pInputText formControlName="telefono">
+    </div>
+
+    <div class="field">
+      <label>Dirección</label>
+      <input pInputText formControlName="direccion">
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button pButton label="Cancelar" class="p-button-text" (click)="cerrar()"></button>
+    <button pButton label="Guardar" (click)="guardar()" [disabled]="form.invalid"></button>
+  </ng-template>
+
+</p-dialog>
