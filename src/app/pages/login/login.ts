@@ -22,7 +22,7 @@ export class Login {
   constructor(private auth: AuthService, private router: Router) {}
 
   onSubmit() {
-    this.auth.login({ usuario: this.username, password: this.password })
+    this.auth.login({ email: this.username, password: this.password })
       .subscribe({
         next: () => {
           this.error = false;

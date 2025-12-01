@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(credentials: { usuario: string; password: string }): Observable<any> {
+  login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(this.apiUrl, credentials).pipe(
       tap((response: any) => {
         if (response?.token) {
