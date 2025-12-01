@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-panel-riesgo',
@@ -12,7 +13,8 @@ import { InputIconModule } from 'primeng/inputicon';
     CommonModule, 
     TableModule, 
     IconFieldModule,
-    InputIconModule
+    InputIconModule,
+    InputTextModule
   ],
   templateUrl: './panel-riesgo.html',
   styleUrl: './panel-riesgo.css',
