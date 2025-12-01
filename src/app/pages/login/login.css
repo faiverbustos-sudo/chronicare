@@ -6,9 +6,16 @@
 }
 
 .login-card {
-  width: 350px;
+  width: 450px;
   padding: 2rem;
   border-radius: 20px;
   background: var(--surface-card);
   box-shadow: var(--card-shadow);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }

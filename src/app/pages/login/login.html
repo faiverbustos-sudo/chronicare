@@ -1,25 +1,34 @@
 <div class="login-container">
   <div class="login-card">
+    <p-card>
+      <h1>CHRONICARE 1.0</h1>
+      <h2>Iniciar Sesión</h2>
 
-    <h2>Iniciar Sesión</h2>
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
 
-    <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <div class="formgrid grid p-fluid">
+          <div class="field col-12">
+            <label for="username">Email</label>
+            <input pInputText id="username" name="username" [(ngModel)]="username" required />
+          </div>
 
-      <div class="p-field">
-        <label for="username">Email</label>
-        <input pInputText id="username" name="username" [(ngModel)]="username" required />
-      </div>
+          <div class="field col-12">
+            <label for="password">Contraseña</label>
+            <p-password id="password" name="password" [(ngModel)]="password" required [feedback]="false" [toggleMask]="true" fluid />
+          </div>
 
-      <div class="p-field">
-        <label for="password">Contraseña</label>
-        <input pPassword id="password" name="password" [(ngModel)]="password" required />
-      </div>
-
-      <button pButton type="submit" label="Ingresar" class="w-full mt-3"></button>
-
-      <p-message *ngIf="error" severity="error" text="Credenciales inválidas"></p-message>
-
-    </form>
+          <div class="field col-12">
+            <button pButton type="submit" label="Ingresar" class="w-full mt-3"></button>
+          </div>       
+          
+          <div class="field col-12">
+            @if(error) {
+              <p-message severity="error" text="Credenciales inválidas"></p-message>
+            }          
+          </div>        
+        </div>
+      </form>
+    </p-card>    
   </div>
 </div>
 

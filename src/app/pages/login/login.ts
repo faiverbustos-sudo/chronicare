@@ -3,14 +3,15 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
-import { Button, ButtonModule } from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
-import { Password, PasswordModule } from 'primeng/password';
+import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, MessageModule, ButtonModule, InputText, PasswordModule, CommonModule],
+  imports: [FormsModule, MessageModule, ButtonModule, InputText, PasswordModule, CommonModule, CardModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
