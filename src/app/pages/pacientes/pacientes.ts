@@ -45,8 +45,8 @@ export class Pacientes {
   cargarPacientes() {
     this.loading = true;
     this.pacienteService.getAll().subscribe({
-      next: (data: Paciente[]) => {
-        this.pacientes = data;
+      next: (data: any) => {
+        this.pacientes = data.result;
         this.loading = false;
       },
       error: () => this.loading = false

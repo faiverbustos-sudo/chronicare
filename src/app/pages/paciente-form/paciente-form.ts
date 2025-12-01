@@ -36,10 +36,12 @@ export class PacienteForm {
   ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
-      identificacion: [''],
+      tipoDocumento: [''],
+      documento: [''],
       telefono: [''],
       email: ['', Validators.email],
-      direccion: ['']
+      direccion: [''],
+      eps: ['']
     });
   }
 
@@ -55,6 +57,7 @@ export class PacienteForm {
     if (this.form.invalid) return;
 
     const data = this.form.value;
+    data.idPaciente = this.paciente ? this.paciente.idPaciente : '';
 
     if (!this.paciente) {
       // Crear
@@ -64,7 +67,7 @@ export class PacienteForm {
       });
     } else {
       // Editar
-      this.pacienteService.update(this.paciente.idPaciente, data)
+      this.pacienteService.update(data)
         .subscribe(() => {
           this.msg.add({severity:'success', summary:'Paciente actualizado'});
           this.close.emit();

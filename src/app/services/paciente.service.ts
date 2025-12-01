@@ -6,10 +6,12 @@ import { PacienteRiesgoDTO } from '../models/paciente-riesgo';
 export interface Paciente {
   idPaciente: string;
   nombre: string;
-  identificacion: string;
+  tipoDocumento: string;
+  documento: string;
   telefono: string;
   email: string;
   direccion: string;
+  eps: string;
   estado: boolean;
 }
 
@@ -22,23 +24,27 @@ export class PacienteService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/All`);
+    return this.http.get(`${this.apiUrl}/GetAll`);
+  }
+
+  getById(id: string): Observable<Paciente> {
+    return this.http.get<Paciente>(`${this.apiUrl}/GetById/${id}`);
   }
 
   create(data: Partial<Paciente>): Observable<Paciente> {
-    return this.http.post<Paciente>(this.apiUrl, data);
-  }
+      return this.http.post<Paciente>(`${this.apiUrl}/Create`, data);
+    }
 
-  update(id: string, data: Partial<Paciente>): Observable<Paciente> {
-    return this.http.put<Paciente>(`${this.apiUrl}/${id}`, data);
+  update(data: Partial<Paciente>): Observable<Paciente> {
+    return this.http.put<Paciente>(`${this.apiUrl}/Update`, data);
   }
 
   activate(id: string): Observable<void> {
-    return this.http.patch<void>(`${this.apiUrl}/${id}/activar`, {});
+    return this.http.patch<void>(`${this.apiUrl}/Activar/${id}`, {});
   }
 
   deactivate(id: string): Observable<void> {
-    return this.http.patch<void>(`${this.apiUrl}/${id}/desactivar`, {});
+    return this.http.patch<void>(`${this.apiUrl}/Inactivar/${id}`, {});
   }
 
   getPacientesRiesgo(): Observable<PacienteRiesgoDTO[]> {

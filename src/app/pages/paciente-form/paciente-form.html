@@ -1,37 +1,48 @@
 <p-dialog [(visible)]="visible"
           modal="true"
           [closable]="false"
-          [style]="{width: '450px'}">
+          [style]="{width: '40vw'}">
 
   <ng-template pTemplate="header">
     <h3>{{ paciente ? 'Editar Paciente' : 'Nuevo Paciente' }}</h3>
   </ng-template>
 
-  <form [formGroup]="form" class="p-fluid">
+  <form [formGroup]="form">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-6">
+        <label for="nombre">Nombre</label>
+        <input pInputText formControlName="nombre">
+      </div>
 
-    <div class="field">
-      <label>Nombre</label>
-      <input pInputText formControlName="nombre">
-    </div>
+      <div class="field col-12 md:col-6">
+        <label>Tipo de Documento</label>
+        <input pInputText formControlName="tipoDocumento">
+      </div>
 
-    <div class="field">
-      <label>Identificación</label>
-      <input pInputText formControlName="identificacion">
-    </div>
+      <div class="field col-12 md:col-6">
+        <label>Identificación</label>
+        <input pInputText formControlName="documento">
+      </div>
 
-    <div class="field">
-      <label>Email</label>
-      <input pInputText formControlName="email">
-    </div>
+      <div class="field col-12 md:col-6">
+        <label>Email</label>
+        <input pInputText formControlName="email">
+      </div>
 
-    <div class="field">
-      <label>Teléfono</label>
-      <input pInputText formControlName="telefono">
-    </div>
+      <div class="field col-12 md:col-6">
+        <label>Teléfono</label>
+        <input pInputText formControlName="telefono">
+      </div>
 
-    <div class="field">
-      <label>Dirección</label>
-      <input pInputText formControlName="direccion">
+      <div class="field col-12 md:col-6">
+        <label>Dirección</label>
+        <input pInputText formControlName="direccion">
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label>EPS</label>
+        <input pInputText formControlName="eps">
+      </div>
     </div>
   </form>
 
