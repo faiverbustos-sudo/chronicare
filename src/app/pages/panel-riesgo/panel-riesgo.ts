@@ -3,10 +3,17 @@ import { PacienteRiesgoDTO } from '../../models/paciente-riesgo';
 import { PacienteService } from '../../services/paciente.service';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 @Component({
   selector: 'app-panel-riesgo',
-  imports: [CommonModule, TableModule],
+  imports: [
+    CommonModule, 
+    TableModule, 
+    IconFieldModule,
+    InputIconModule
+  ],
   templateUrl: './panel-riesgo.html',
   styleUrl: './panel-riesgo.css',
 })

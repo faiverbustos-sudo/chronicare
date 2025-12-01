@@ -8,6 +8,9 @@ import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { PacienteForm } from '../paciente-form/paciente-form';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @Component({
@@ -22,7 +25,12 @@ import { PacienteForm } from '../paciente-form/paciente-form';
     DialogModule,
     ConfirmDialogModule,
     ToastModule,    
-    PacienteForm 
+    PacienteForm,
+    IconFieldModule,
+    InputIconModule,
+    InputTextModule
+  ],
+  providers: [ConfirmationService, MessageService
   ]
 })
 export class Pacientes {

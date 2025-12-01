@@ -37,7 +37,7 @@ export class PacienteForm {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
       tipoDocumento: [''],
-      documento: [''],
+      documento: ['', Validators.required],
       telefono: [''],
       email: ['', Validators.email],
       direccion: [''],

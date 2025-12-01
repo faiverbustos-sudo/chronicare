@@ -6,13 +6,34 @@
   <button pButton label="Nuevo Paciente" icon="pi pi-plus" (click)="nuevoPaciente()"></button>
 </div>
 
-<p-table [value]="pacientes" [loading]="loading" [paginator]="true" [rows]="10">
+<p-table
+  #dt2
+  [value]="pacientes" 
+  [loading]="loading" 
+  [paginator]="true" 
+  [rows]="10" 
+  responsiveLayout="stack"
+  [globalFilterFields]="['nombre', 'tipoDocumento', 'documento', 'email', 'telefono', 'direccion', 'eps', 'estado']">
+
+  <ng-template #caption>
+    <div class="flex">
+        <p-iconfield iconPosition="left" class="ml-auto">
+            <p-inputicon>
+                <i class="pi pi-search"></i>
+            </p-inputicon>
+            <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+        </p-iconfield>
+    </div>
+  </ng-template>
 
   <ng-template pTemplate="header">
     <tr>
       <th>Nombre</th>
       <th>Identificación</th>
       <th>Email</th>
+      <th>Teléfono</th>
+      <th>Dirección</th>
+      <th>EPS</th>
       <th>Estado</th>
       <th style="width: 200px">Acciones</th>
     </tr>
@@ -23,6 +44,9 @@
       <td>{{ p.nombre }}</td>
       <td>{{ p.tipoDocumento | uppercase }} - {{ p.documento }}</td>
       <td>{{ p.email }}</td>
+      <td>{{ p.telefono }}</td>
+      <td>{{ p.direccion }}</td>
+      <td>{{ p.eps }}</td>
       <td>
         <span [ngClass]="p.estado === 'activo' ? 'text-green-600' : 'text-red-600'">
           {{ p.estado === 'activo' ? 'Activo' : 'Inactivo' }}
