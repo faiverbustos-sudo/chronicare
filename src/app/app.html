@@ -1,28 +1,31 @@
 <!-- Topbar -->
 <header class="topbar">
-  <button pButton
+  @if (isAuthenticated() && (getRole() === 'Admin' || getRole() === 'Medico')) {
+    <button pButton
           icon="pi pi-bars"
           class="p-button-lg"
-          (click)="sidebarVisible = !sidebarVisible"
-          *ngIf="isAuthenticated()">
-  </button>
+          (click)="sidebarVisible = !sidebarVisible">
+    </button>
+  }  
 </header>
 
 <!-- Sidebar -->
-<p-drawer [(visible)]="sidebarVisible"
-          [modal]="false"
-          [showCloseIcon]="true"
-          styleClass="custom-sidebar"
-          [closable]="true"
-          [dismissible]="true"
-          *ngIf="isAuthenticated()">
+ @if (isAuthenticated() && (getRole() === 'Admin' || getRole() === 'Medico')) {
+  <p-drawer [(visible)]="sidebarVisible"
+    [modal]="false"
+    [showCloseIcon]="true"
+    styleClass="custom-sidebar"
+    [closable]="true"
+    [dismissible]="true">
 
-  <h3 class="sidebar-title">Menú</h3>
+    <h3 class="sidebar-title">Menú</h3>
 
-  <p-menu [model]="menuItems"></p-menu>
+    <p-menu [model]="menuItems"></p-menu>
 
-  <button pButton type="button" label="Cerrar sesión" class="w-full mt-3" (click)="logout()"></button>
-</p-drawer>
+    <button pButton type="button" label="Cerrar sesión" class="w-full mt-3" (click)="logout()"></button>
+  </p-drawer>
+ }
+
 
 <!-- Contenido principal -->
 <div class="content" [class.push-content]="sidebarVisible">

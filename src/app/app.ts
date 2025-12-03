@@ -37,4 +37,8 @@ export class App {
   isAuthenticated(): boolean {
     return this.auth.isAuthenticated();
   }
+
+  getRole(): string {
+    return this.auth.getRole() || '';
+  }
 }

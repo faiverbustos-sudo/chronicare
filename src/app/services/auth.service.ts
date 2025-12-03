@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,22 @@ export class AuthService {
       tap((response: any) => {
         if (response?.token) {
           localStorage.setItem('token', response.token);
+
+          // Obtener rol desde el token
+          const role = this.getRole();
+          console.log('Rol del usuario:', role);
+
+          // Redirección
+          if (role === 'Admin' || role === 'Medico') {
+            this.router.navigate(['/dashboard']);
+          } else if (role === 'Paciente') {
+            console.log('Navegando al paciente dashboard');
+            this.router.navigate(['/paciente-dashboard']);
+          } else {
+            // Perfil desconocido → cerrar sesión
+            localStorage.removeItem('token');
+            this.router.navigate(['/login']);
+          }
         }
       })
     );
@@ -33,5 +50,14 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  getRole(): string | null {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+
+    const decoded: any = jwtDecode(token);
+    console.log('Token decodificado:', decoded);
+    return decoded.roles ?? decoded.perfil ?? null; 
   }
 }
