@@ -1,1 +1,47 @@
-<p>paciente-dashboard works!</p>
+<div class="flex flex-col gap-4">
+
+  <!-- TARJETA PRINCIPAL "Inicio" -->
+  <div class="rounded-2xl shadow-md p-4 bg-white">
+    <h2 class="text-xl font-semibold mb-4">Inicio</h2>
+
+    <!-- Recordatorio medicamentos -->
+    <p class="font-medium">Recordatorio de medicamentos</p>
+    <div class="mt-2 flex items-center gap-3 p-3 bg-gray-100 rounded-xl">
+      <i class="pi pi-user text-gray-500"></i>
+      <span>{{ medicamentos[0].nombre }} {{ medicamentos[0].dosis }}</span>
+    </div>
+
+    <!-- Alerta -->
+     @if(alertaRiesgo.activo) {
+        <div class="mt-4 p-3 rounded-xl bg-green-100 text-green-800">
+            <p class="font-semibold">Alerta de riesgo</p>
+            <p>{{ alertaRiesgo.mensaje }}</p>
+        </div>
+    }
+
+    <!-- Próxima cita -->
+    <p class="font-medium mt-4">Próxima cita</p>
+    <div class="mt-1 p-3 rounded-xl bg-gray-50 border">
+      {{ proximaCita }}
+    </div>
+
+    <!-- Próximo control -->
+    <p class="font-medium mt-4">Próximo control</p>
+    <div class="mt-1 p-3 rounded-xl bg-gray-50 border">
+      {{ proximoControl }}
+    </div>
+
+    <!-- Tareas pendientes -->
+    <p class="font-medium mt-4">Tareas pendientes</p>
+    <div class="mt-2 space-y-2">
+      <div
+        *ngFor="let t of tareasPendientes"
+        class="flex items-center gap-3 p-2 rounded-xl border bg-gray-50"
+      >
+        <i class="pi pi-check-circle text-gray-600"></i>
+        <span>{{ t.nombre }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>

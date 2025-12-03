@@ -1,0 +1,9 @@
+/* Ajustes suaves como en el mockup */
+:host {
+  display: block;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
