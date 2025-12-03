@@ -15,6 +15,16 @@ export interface Paciente {
   estado: boolean;
 }
 
+export interface PacienteDashboardDto {
+  idPaciente: string;
+  nombre: string;
+  proximaCita: string;
+  proximoControl: string;
+  alertaDescripcion: string;
+  tareas: string[];
+  medicamentos: { nombre: string; dosis: string }[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -49,5 +59,9 @@ export class PacienteService {
 
   getPacientesRiesgo(): Observable<PacienteRiesgoDTO[]> {
     return this.http.get<PacienteRiesgoDTO[]>(`${this.apiUrl}/PacientesRiesgo`);
+  }
+
+  getPacienteDashboard(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/PacienteDashboard`);
   }
 }

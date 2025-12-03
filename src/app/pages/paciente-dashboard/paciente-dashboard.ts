@@ -5,6 +5,8 @@ import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
+import { AuthService } from '../../services/auth.service';
+import { PacienteDashboardDto, PacienteService } from '../../services/paciente.service';
 
 @Component({
   selector: 'app-paciente-dashboard',
@@ -38,4 +40,24 @@ export class PacienteDashboard {
     { nombre: 'Presión arterial' },
     { nombre: 'Peso' }
   ];
+
+  dashboardData: PacienteDashboardDto | undefined;
+
+  constructor(private auth: AuthService, private _pacienteService: PacienteService) {    
+  }
+
+  ngOnInit() {
+    this.getDashboardData();
+  }
+
+  getDashboardData() {
+    this._pacienteService.getPacienteDashboard().subscribe(data => {
+      console.log(data);
+      this.dashboardData = data.result;
+    });
+  }
+
+  logout() {
+    this.auth.logout();
+  }
 }
