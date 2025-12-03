@@ -1,0 +1,15 @@
+.card-hoy {
+  @apply p-5 bg-white border border-gray-200 rounded-3xl shadow-sm;
+}
+
+.valor-box {
+  @apply text-3xl font-semibold bg-gray-100 px-5 py-3 rounded-xl text-center;
+}
+
+.educacion-box {
+  @apply mt-5 p-4 rounded-xl bg-blue-50 cursor-pointer transition;
+}
+
+.educacion-box:hover {
+  @apply bg-blue-100;
+}

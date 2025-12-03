@@ -7,6 +7,7 @@ import { DividerModule } from 'primeng/divider';
 import { TagModule } from 'primeng/tag';
 import { AuthService } from '../../services/auth.service';
 import { PacienteDashboardDto, PacienteService } from '../../services/paciente.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-paciente-dashboard',
@@ -16,30 +17,13 @@ import { PacienteDashboardDto, PacienteService } from '../../services/paciente.s
     TagModule,
     DividerModule,
     ButtonModule,
-    CheckboxModule
+    CheckboxModule,
+    RouterModule
   ],
   templateUrl: './paciente-dashboard.html',
   styleUrl: './paciente-dashboard.css',
 })
 export class PacienteDashboard {
-  medicamentos = [
-    { nombre: 'Metformina', dosis: '1 tableta' }
-  ];
-
-  alertaRiesgo = {
-    mensaje: 'Tu presión estuvo alta en las últimas 48 horas',
-    activo: true
-  };
-
-  proximaCita = '5 de marzo';
-
-  proximoControl = 'Glucosa';
-
-  tareasPendientes = [
-    { nombre: 'Glucosa' },
-    { nombre: 'Presión arterial' },
-    { nombre: 'Peso' }
-  ];
 
   dashboardData: PacienteDashboardDto | undefined;
 

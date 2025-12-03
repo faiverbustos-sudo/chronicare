@@ -1,0 +1,98 @@
+@if(pacienteHoyData) {
+    <p-card class="card-hoy w-full max-w-md">
+
+        <h2 class="text-2xl font-semibold">Hoy</h2>
+
+        <!-- PRESIÓN ARTERIAL -->
+            <div class="mb-4">
+                <label for="presion" class="block mb-1">Presión</label>
+
+                <p-inputGroup>
+                    <p-inputmask mask="999/99" [(ngModel)]="presion" placeholder="140/90" />
+
+                    <button 
+                        pButton 
+                        label="Registrar"
+                        (click)="registrarPresion()"
+                        type="button">
+                    </button>
+                </p-inputGroup>
+            </div>
+
+            <div class="mb-4">
+                <label for="glucosa" class="block mb-1">Glucosa</label>
+
+                <p-inputGroup>
+                    <p-inputNumber 
+                        inputId="glucosa"
+                        [(ngModel)]="glucosa"
+                        suffix=" mg/dl"
+                        name="glucosa"
+                        [min]="0"/>
+
+                    <button 
+                        pButton 
+                        label="Registrar"
+                        (click)="registrarGlucosa()"
+                        type="button">
+                    </button>
+                </p-inputGroup>
+            </div>
+
+
+        <!-- MEDICAMENTOS -->
+        <div class="mt-5">
+            <p class="text-gray-500 mb-2">Medicamentos</p>
+            @if(pacienteHoyData.adherenciasMedicamentos.length === 0) {
+                <p class="text-gray-400">No hay medicamentos para registrar hoy.</p>
+            }
+            @else {
+                <div class="flex flex-wrap gap-3">
+                    @for (m of pacienteHoyData.adherenciasMedicamentos; track $index) {
+                        <div class="bg-gray-100 p-3 rounded-lg flex align-items-center justify-content-between gap-3 min-w-[180px] shadow-sm w-full">
+                            <span class="font-medium">{{ m.nombre }}</span>
+
+                            <div class="flex align-items-center justify-content-end gap-2">
+                                <p-checkbox 
+                                    [(ngModel)]="m.tomado"
+                                    [binary]="true"
+                                    (onChange)="registrarAdherencia(m)">
+                                </p-checkbox>
+                                @if(m.tomado) {
+                                    <span class="text-sm text-green-600 font-semibold">Tomado</span>
+                                } 
+                                @else {
+                                    <span class="text-sm">No tomado</span>
+                                } 
+                            </div>                               
+                        </div>
+                    } 
+                </div>
+            }        
+        </div>
+
+
+        <!-- EDUCACIÓN DEL DÍA -->
+        <div class="educacion-box mt-5">
+            <p class="text-blue-700 font-medium mb-1">Educación del día</p>
+            <p class="text-gray-800">Cómo medir bien tu presión</p>
+        </div>
+
+        <div class="mt-5">
+            <button 
+                pButton 
+                label="Regresar" 
+                icon="pi pi-arrow-left" 
+                class="p-button-primary"
+                routerLink="/paciente-dashboard"
+                severity="info">
+            </button>
+        </div>
+
+    </p-card>
+}
+
+<p-toast></p-toast>
+
+
+

@@ -21,13 +21,11 @@ export class AuthService {
 
           // Obtener rol desde el token
           const role = this.getRole();
-          console.log('Rol del usuario:', role);
 
           // Redirección
           if (role === 'Admin' || role === 'Medico') {
             this.router.navigate(['/dashboard']);
           } else if (role === 'Paciente') {
-            console.log('Navegando al paciente dashboard');
             this.router.navigate(['/paciente-dashboard']);
           } else {
             // Perfil desconocido → cerrar sesión
@@ -57,7 +55,6 @@ export class AuthService {
     if (!token) return null;
 
     const decoded: any = jwtDecode(token);
-    console.log('Token decodificado:', decoded);
     return decoded.roles ?? decoded.perfil ?? null; 
   }
 }

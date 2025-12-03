@@ -25,6 +25,22 @@ export interface PacienteDashboardDto {
   medicamentos: { nombre: string; dosis: string }[];
 }
 
+export interface AdherenciaMedicamentoHoyDto {
+  idMedicamento: string;
+  idAdherencia: string;
+  idPaciente: string;
+  nombre: string;
+  tomado: boolean;
+}
+
+export interface PacienteHoyDto {
+  idPaciente: string;
+  nombre: string;
+  presion: string;
+  valorNumerico: number;
+  adherenciasMedicamentos: AdherenciaMedicamentoHoyDto[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -63,5 +79,9 @@ export class PacienteService {
 
   getPacienteDashboard(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/PacienteDashboard`);
+  }
+
+  getPacienteHoy(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/PacienteHoy`);
   }
 }

@@ -5,6 +5,18 @@
     <div class="rounded-2xl shadow-md p-4 bg-white">
       <h2 class="text-xl font-semibold mb-4">Inicio</h2>
 
+      <div>
+        <p class="font-medium">Bienvenido de nuevo, {{ dashboardData.nombre }}!</p>
+        <p class="text-gray-600 mt-1">Aquí tienes un resumen de tu información de salud.</p>
+        <button 
+          pButton 
+          label="Ir a Hoy" 
+          icon="pi pi-arrow-right" 
+          class="p-button-primary"
+          routerLink="/paciente-hoy">
+        </button>
+      </div>
+
       <!-- Recordatorio medicamentos -->
       <p class="font-medium">Recordatorio de medicamentos</p>
       <div class="mt-2 flex items-center gap-3 p-3 bg-gray-100 rounded-xl">
@@ -15,12 +27,10 @@
       </div>
 
       <!-- Alerta -->
-      @if(alertaRiesgo.activo) {
-          <div class="mt-4 p-3 rounded-xl bg-green-100 text-green-800">
-              <p class="font-semibold">Alerta de riesgo</p>
-              <p>{{ dashboardData.alertaDescripcion }}</p>
-          </div>
-      }
+      <div class="mt-4 p-3 rounded-xl bg-green-100 text-green-800">
+          <p class="font-semibold">Alerta de riesgo</p>
+          <p>{{ dashboardData.alertaDescripcion }}</p>
+      </div>
 
       <!-- Próxima cita -->
       <p class="font-medium mt-4">Próxima cita</p>
@@ -46,8 +56,8 @@
         }        
       </div>
 
-      <div>
-        <button pButton type="button" label="Cerrar sesión" class="w-full mt-3" (click)="logout()"></button>
+      <div style="margin-top: 60px;">
+        <button pButton type="button" label="Cerrar sesión" class="w-full mt-3" (click)="logout()" severity="secondary"></button>
       </div>
     </div>
 
