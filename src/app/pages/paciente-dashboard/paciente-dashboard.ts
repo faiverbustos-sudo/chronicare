@@ -36,7 +36,6 @@ export class PacienteDashboard {
 
   getDashboardData() {
     this._pacienteService.getPacienteDashboard().subscribe(data => {
-      console.log(data);
       this.dashboardData = data.result;
     });
   }

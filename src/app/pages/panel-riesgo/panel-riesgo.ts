@@ -6,6 +6,11 @@ import { TableModule } from 'primeng/table';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
+import { RouterModule } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-panel-riesgo',
@@ -14,7 +19,11 @@ import { InputTextModule } from 'primeng/inputtext';
     TableModule, 
     IconFieldModule,
     InputIconModule,
-    InputTextModule
+    InputTextModule,
+    RouterModule,
+    ButtonModule,
+    TooltipModule,
+    BreadcrumbModule
   ],
   templateUrl: './panel-riesgo.html',
   styleUrl: './panel-riesgo.css',
@@ -22,8 +31,13 @@ import { InputTextModule } from 'primeng/inputtext';
 export class PanelRiesgo {
   pacientes: PacienteRiesgoDTO[] = [];
     loading = true;
+
+    breadcrumbItems: MenuItem[] | undefined;
+    home: MenuItem | undefined;
     
-    constructor(private pacienteService: PacienteService) {}
+    constructor(private pacienteService: PacienteService) {
+      this.home = { icon: 'pi pi-exclamation-triangle', label: 'Panel de riesgo', routerLink: '/panel-riesgo' };
+    }
   
     ngOnInit() {
       this.pacienteService.getPacientesRiesgo().subscribe({

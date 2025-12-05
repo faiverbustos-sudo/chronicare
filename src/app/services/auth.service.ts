@@ -57,4 +57,11 @@ export class AuthService {
     const decoded: any = jwtDecode(token);
     return decoded.roles ?? decoded.perfil ?? null; 
   }
+
+  getUserData(): any {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+    const decoded: any = jwtDecode(token);
+    return decoded;
+  }
 }

@@ -18,10 +18,11 @@ export class App {
   
   menuItems = [
     { label: 'Dashboard', icon: 'pi pi-home', routerLink: '/' },
+    { label: 'Médicos', icon: 'pi pi-user', routerLink: '/medicos' },
     { label: 'Pacientes', icon: 'pi pi-users', routerLink: '/pacientes' },
     { label: 'Panel de riesgo', icon: 'pi pi-exclamation-triangle', routerLink: '/panel-riesgo' },
-    { label: 'Reportes', icon: 'pi pi-chart-line', routerLink: '/reports' },
-    { label: 'Configuración', icon: 'pi pi-cog', routerLink: '/settings' }
+    { label: 'Reportes', icon: 'pi pi-chart-line', routerLink: '/reportes' },
+    { label: 'Configuración', icon: 'pi pi-cog', routerLink: '/configuracion' }
   ];
 
   protected readonly title = signal('ChronicareWebApp');

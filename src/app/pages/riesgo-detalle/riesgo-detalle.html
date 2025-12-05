@@ -1,0 +1,16 @@
+@if(paciente) {
+    <p-breadcrumb [model]="breadcrumbItems" [home]="home" />
+    <h2><span class="pi pi-exclamation-triangle" style="font-size: 2rem"></span> Detalle de riesgos paciente {{paciente.nombre}}</h2>
+
+    <div class="card" style="margin-top: 30px;">
+        <h3>Gráfico de riesgos presión arterial</h3>
+        <p-chart type="line" [data]="dataPresion" [options]="options" class="h-[30rem]" />
+    </div>
+
+    <div class="card" style="margin-top: 30px;">
+        <h3>Gráfico de riesgos glucosa</h3>
+        <p-chart type="line" [data]="dataGlucosa" [options]="options" class="h-[30rem]" />
+    </div>
+}
+
+

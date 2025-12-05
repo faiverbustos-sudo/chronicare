@@ -84,4 +84,8 @@ export class PacienteService {
   getPacienteHoy(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/PacienteHoy`);
   }
+
+  getRiesgoDetallePaciente(idPaciente: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/RiesgoDetallePaciente/${idPaciente}`);
+  }
 }
