@@ -1,0 +1,50 @@
+<p-dialog [(visible)]="visible"
+          modal="true"
+          [closable]="false"
+          [style]="{width: '40vw'}">
+
+  <ng-template pTemplate="header">
+    <h3>{{ medicamento ? 'Editar Medicamento' : 'Nuevo Medicamento' }}</h3>
+  </ng-template>
+
+  <form [formGroup]="form">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-6">
+        <label for="nombre">Nombre *</label>
+        <input pInputText formControlName="nombre">
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label>Dosis *</label>
+        <input pInputText formControlName="dosis">
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label>Frecuencia *</label>
+        <input pInputText formControlName="frecuencia">
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label>Vía *</label>
+        <input pInputText formControlName="via">
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label>Fecha inicio *</label>
+        <p-datepicker formControlName="fechaInicio" [appendTo]="'body'" fluid/>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label>Fecha fin *</label>
+        <p-datepicker formControlName="fechaFin" [appendTo]="'body'" fluid/>
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button pButton label="Cancelar" class="p-button-text" (click)="cerrar()"></button>
+    <button pButton label="Guardar" (click)="guardar()" [disabled]="form.invalid"></button>
+  </ng-template>
+
+</p-dialog>
+

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Paciente, PacienteService } from '../../services/paciente.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -11,6 +11,9 @@ import { PacienteForm } from '../paciente-form/paciente-form';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
+import { RouterModule } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 
 @Component({
@@ -28,7 +31,10 @@ import { InputTextModule } from 'primeng/inputtext';
     PacienteForm,
     IconFieldModule,
     InputIconModule,
-    InputTextModule
+    InputTextModule,
+    RouterModule,
+    TooltipModule,
+    BreadcrumbModule
   ],
   providers: [ConfirmationService, MessageService
   ]
@@ -39,6 +45,9 @@ export class Pacientes {
 
   showModal = false;
   pacienteSeleccionado: Paciente | null = null;
+
+  breadcrumbItems: MenuItem[] | undefined;
+  home: MenuItem | undefined;
 
   constructor(
     private pacienteService: PacienteService,
@@ -59,6 +68,8 @@ export class Pacientes {
       },
       error: () => this.loading = false
     });
+
+    this.home = { icon: 'pi pi-users', label: 'Pacientes', routerLink: '/pacientes' };
   }
 
   nuevoPaciente() {
@@ -74,9 +85,13 @@ export class Pacientes {
   activar(p: Paciente) {
     this.confirm.confirm({
       message: `¿Deseas activar al paciente ${p.nombre}?`,
+      header: 'Confirmar Activación',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Aceptar',
+      rejectLabel: 'Cancelar',
       accept: () => {
         this.pacienteService.activate(p.idPaciente).subscribe(() => {
-          this.msg.add({severity:'success', summary:'Activado'});
+          this.msg.add({severity:'success', summary:'Activado', detail: 'Se ha activado el paciente correctamente'});
           this.cargarPacientes();
         });
       }
@@ -86,9 +101,13 @@ export class Pacientes {
   desactivar(p: Paciente) {
     this.confirm.confirm({
       message: `¿Deseas desactivar al paciente ${p.nombre}?`,
+      header: 'Confirmar Desactivación',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Aceptar',
+      rejectLabel: 'Cancelar',
       accept: () => {
         this.pacienteService.deactivate(p.idPaciente).subscribe(() => {
-          this.msg.add({severity:'info', summary:'Desactivado'});
+          this.msg.add({severity:'info', summary:'Desactivado', detail: 'Se ha desactivado el paciente correctamente'});
           this.cargarPacientes();
         });
       }

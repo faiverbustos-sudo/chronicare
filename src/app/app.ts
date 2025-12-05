@@ -19,7 +19,7 @@ export class App {
   menuItems = [
     { label: 'Dashboard', icon: 'pi pi-home', routerLink: '/' },
     { label: 'Pacientes', icon: 'pi pi-users', routerLink: '/pacientes' },
-    { label: 'Panel de riesgo', icon: 'pi pi-users', routerLink: '/panel-riesgo' },
+    { label: 'Panel de riesgo', icon: 'pi pi-exclamation-triangle', routerLink: '/panel-riesgo' },
     { label: 'Reportes', icon: 'pi pi-chart-line', routerLink: '/reports' },
     { label: 'Configuración', icon: 'pi pi-cog', routerLink: '/settings' }
   ];

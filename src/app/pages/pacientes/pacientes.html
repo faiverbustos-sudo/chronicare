@@ -2,7 +2,8 @@
 <p-confirmDialog></p-confirmDialog>
 
 <div class="p-d-flex p-jc-between p-ai-center mb-3">
-  <h2>Pacientes</h2>
+  <p-breadcrumb [model]="breadcrumbItems" [home]="home" />
+  <h2><span class="pi pi-users" style="font-size: 2rem"></span> Pacientes</h2>
   <button pButton label="Nuevo Paciente" icon="pi pi-plus" (click)="nuevoPaciente()"></button>
 </div>
 
@@ -54,15 +55,28 @@
       </td>
       <td>
         <div class="flex gap-2 align-items-center">
-            <button pButton icon="pi pi-pencil" class="mr-2" (click)="editarPaciente(p)"></button>      
+            <button 
+              pButton 
+              icon="pi pi-pencil" 
+              class="mr-2"
+              pTooltip="Editar paciente"
+              (click)="editarPaciente(p)"></button>
 
-          @if (p.estado === 'activo') {
-              <button pButton icon="pi pi-ban" class="p-button-danger" (click)="desactivar(p)"></button>          
-          }        
+            <button 
+              pButton 
+              icon="pi pi pi-heart"
+              class="mr-2"
+              pTooltip="Ver medicamentos"
+              severity="help"
+              [routerLink]="['/medicamentos', p.idPaciente]"></button>
 
-          @if (p.estado === 'inactivo') {
-              <button pButton icon="pi pi-check" class="p-button-success" (click)="activar(p)"></button>        
-          } 
+            @if (p.estado === 'activo') {
+                <button pButton icon="pi pi-ban" class="p-button-danger" (click)="desactivar(p)" pTooltip="Desactivar paciente"></button>          
+            }        
+
+            @if (p.estado === 'inactivo') {
+                <button pButton icon="pi pi-check" class="p-button-success" (click)="activar(p)" pTooltip="Activar paciente"></button>        
+            } 
         </div>               
       </td>
     </tr>

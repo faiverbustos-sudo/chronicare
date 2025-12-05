@@ -7,6 +7,7 @@ import { authGuard } from './guards/auth-guard';
 import { PanelRiesgo } from './pages/panel-riesgo/panel-riesgo';
 import { PacienteDashboard } from './pages/paciente-dashboard/paciente-dashboard';
 import { PacienteHoy } from './pages/paciente-hoy/paciente-hoy';
+import { Medicamentos } from './pages/medicamentos/medicamentos';
 
 export const routes: Routes = [
     { path: 'login', component: Login },
@@ -20,7 +21,8 @@ export const routes: Routes = [
             { path: 'pacientes', component: Pacientes },
             { path: 'panel-riesgo', component: PanelRiesgo },
             { path: 'paciente-dashboard', component: PacienteDashboard },
-            { path: 'paciente-hoy', component: PacienteHoy }
+            { path: 'paciente-hoy', component: PacienteHoy },
+            { path: 'medicamentos/:idPaciente', component: Medicamentos }
         ]
     },
     { path: '**', redirectTo: 'login' }

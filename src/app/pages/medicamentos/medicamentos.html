@@ -1,0 +1,80 @@
+@if(paciente) {
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+
+    <div class="p-d-flex p-jc-between p-ai-center mb-3">
+        <p-breadcrumb [model]="breadcrumbItems" [home]="home" />
+        <h2><span class="pi pi-heart" style="font-size: 2rem"></span> Medicamentos para paciente {{paciente.nombre}}</h2>
+        <button pButton label="Nuevo medicamento" icon="pi pi-plus" (click)="nuevoMedicamento()"></button>
+    </div>
+
+    <p-table
+        #dt2
+        [value]="medicamentos" 
+        [loading]="loading" 
+        [paginator]="true" 
+        [rows]="10" 
+        responsiveLayout="stack"
+        [globalFilterFields]="['nombre', 'dosis', 'frecuencia', 'via', 'fechaInicio', 'fechaFin', 'estado']">
+
+        <ng-template #caption>
+            <div class="flex">
+                <p-iconfield iconPosition="left" class="ml-auto">
+                    <p-inputicon>
+                        <i class="pi pi-search"></i>
+                    </p-inputicon>
+                    <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Buscar..." />
+                </p-iconfield>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+            <th>Nombre</th>
+            <th>Dosis</th>
+            <th>Frecuencia</th>
+            <th>Vía</th>
+            <th>Fecha inicio</th>
+            <th>Fecha fin</th>
+            <th>Estado</th>
+            <th style="width: 200px">Acciones</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-m>
+            <tr>
+            <td>{{ m.nombre }}</td>
+            <td>{{ m.dosis }}</td>
+            <td>{{ m.frecuencia }}</td>
+            <td>{{ m.via }}</td>
+            <td>{{ m.fechaInicio | date:'dd-MM-yyyy' }}</td>
+            <td>{{ m.fechaFin | date:'dd-MM-yyyy' }}</td>
+            <td>
+                <span [ngClass]="m.activo ? 'text-green-600' : 'text-red-600'">
+                {{ m.activo ? 'Activo' : 'Inactivo' }}
+                </span>
+            </td>
+            <td>
+                <div class="flex gap-2 align-items-center">
+                    <button pButton icon="pi pi-pencil" class="mr-2" (click)="editarMedicamento(m)" pTooltip="Editar"></button>      
+
+                    @if (m.activo) {
+                        <button pButton icon="pi pi-ban" class="p-button-danger" (click)="desactivar(m)" pTooltip="Desactivar"></button>          
+                    }        
+
+                    @if (!m.activo) {
+                        <button pButton icon="pi pi-check" class="p-button-success" (click)="activar(m)" pTooltip="Activar"></button>        
+                    } 
+                </div>               
+            </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <app-medicamento-form
+        [visible]="showModal"
+        [medicamento]="medicamentoSeleccionado"
+        [idPaciente]="paciente.idPaciente"
+        (close)="onModalClose()">
+    </app-medicamento-form>
+}
